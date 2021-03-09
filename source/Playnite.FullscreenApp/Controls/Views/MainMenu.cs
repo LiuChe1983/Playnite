@@ -37,12 +37,12 @@ namespace Playnite.FullscreenApp.Controls.Views
         private ButtonBase ButtonSwitchToDesktop;
         private ButtonBase ButtonPatreon;
         private ButtonBase ButtoFeedback;
-        private ButtonBase ButtonRestartSystem;
-        private ButtonBase ButtonShutdownSystem;
-        private ButtonBase ButtonSleepSystem;
-        private ButtonBase ButtonHibernateSystem;
+       // private ButtonBase ButtonRestartSystem;
+       // private ButtonBase ButtonShutdownSystem;
+       // private ButtonBase ButtonSleepSystem;
+        //private ButtonBase ButtonHibernateSystem;
         private ButtonBase ButtonPickRandomGame;
-        private ButtonBase ButtonUpdateLibrary;
+       // private ButtonBase ButtonUpdateLibrary;
 
         static MainMenu()
         {
@@ -86,16 +86,17 @@ namespace Playnite.FullscreenApp.Controls.Views
                 if (ButtonSettings != null)
                 {
                     ButtonSettings.Command = mainModel.ToggleSettingsMenuCommand;
-                    BindingTools.SetBinding(ButtonSettings,
-                         FocusBahaviors.FocusBindingProperty,
-                         mainModel,
-                         nameof(mainModel.MainMenuFocused));
+
                 }
 
                 ButtonExitPlaynite = Template.FindName("PART_ButtonExitPlaynite", this) as ButtonBase;
                 if (ButtonExitPlaynite != null)
                 {
                     ButtonExitPlaynite.Command = mainModel.ExitCommand;
+                    BindingTools.SetBinding(ButtonExitPlaynite,
+                        FocusBahaviors.FocusBindingProperty,
+                        mainModel,
+                        nameof(mainModel.MainMenuFocused));
                 }
 
                 ButtonSwitchToDesktop = Template.FindName("PART_ButtonSwitchToDesktop", this) as ButtonBase;
@@ -131,35 +132,35 @@ namespace Playnite.FullscreenApp.Controls.Views
                     }
                 }
 
-                ButtonRestartSystem = Template.FindName("PART_ButtonRestartSystem", this) as ButtonBase;
-                if (ButtonRestartSystem != null)
-                {
-                    ButtonRestartSystem.Command = mainModel.RestartSystemCommand;
-                }
+                //ButtonRestartSystem = Template.FindName("PART_ButtonRestartSystem", this) as ButtonBase;
+                //if (ButtonRestartSystem != null)
+                //{
+                //    ButtonRestartSystem.Command = mainModel.RestartSystemCommand;
+                //}
 
-                ButtonShutdownSystem = Template.FindName("PART_ButtonShutdownSystem", this) as ButtonBase;
-                if (ButtonShutdownSystem != null)
-                {
-                    ButtonShutdownSystem.Command = mainModel.ShutdownSystemCommand;
-                }
+                //ButtonShutdownSystem = Template.FindName("PART_ButtonShutdownSystem", this) as ButtonBase;
+                //if (ButtonShutdownSystem != null)
+                //{
+                //    ButtonShutdownSystem.Command = mainModel.ShutdownSystemCommand;
+                //}
 
-                ButtonSleepSystem = Template.FindName("PART_ButtonSleepSystem", this) as ButtonBase;
-                if (ButtonSleepSystem != null)
-                {
-                    ButtonSleepSystem.Command = mainModel.SleepSystemCommand;
-                }
+                //ButtonSleepSystem = Template.FindName("PART_ButtonSleepSystem", this) as ButtonBase;
+                //if (ButtonSleepSystem != null)
+                //{
+                //    ButtonSleepSystem.Command = mainModel.SleepSystemCommand;
+                //}
 
-                ButtonHibernateSystem = Template.FindName("PART_ButtonHibernateSystem", this) as ButtonBase;
-                if (ButtonHibernateSystem != null)
-                {
-                    ButtonHibernateSystem.Command = mainModel.HibernateSystemCommand;
-                }
+                //ButtonHibernateSystem = Template.FindName("PART_ButtonHibernateSystem", this) as ButtonBase;
+                //if (ButtonHibernateSystem != null)
+                //{
+                //    ButtonHibernateSystem.Command = mainModel.HibernateSystemCommand;
+                //}
 
-                ButtonUpdateLibrary = Template.FindName("PART_ButtonUpdateLibrary", this) as ButtonBase;
-                if (ButtonUpdateLibrary != null)
-                {
-                    ButtonUpdateLibrary.Command = mainModel.UpdateGamesCommand;
-                }
+                //ButtonUpdateLibrary = Template.FindName("PART_ButtonUpdateLibrary", this) as ButtonBase;
+                //if (ButtonUpdateLibrary != null)
+                //{
+                //    ButtonUpdateLibrary.Command = mainModel.UpdateGamesCommand;
+                //}
             }
         }
     }

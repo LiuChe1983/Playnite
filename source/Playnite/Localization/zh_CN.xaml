@@ -645,7 +645,7 @@
     <sys:String x:Key="LOCStartupError">启动错误</sys:String>
     <sys:String x:Key="LOCSkinError">主题错误</sys:String>
     <sys:String x:Key="LOCClearAll">全部清除</sys:String>
-    <sys:String x:Key="LOCSetupRunning">正在安装</sys:String>
+    <sys:String x:Key="LOCSetupRunning">存档同步中</sys:String>
     <sys:String x:Key="LOCUninstalling">正在卸载</sys:String>
     <sys:String x:Key="LOCGameLaunching">正在启动</sys:String>
     <sys:String x:Key="LOCGameRunning">正在运行</sys:String>
@@ -679,7 +679,7 @@
     <sys:String x:Key="LOCNoGamesFound">找不到符合指定 搜索/过滤 条件的游戏</sys:String>
     <sys:String x:Key="LOCNoItemsFound">未找到项目</sys:String>
     <sys:String x:Key="LOCBackToDesktopMode">切换至桌面模式</sys:String>
-    <sys:String x:Key="LOCExitPlaynite">退出Playnite</sys:String>
+    <sys:String x:Key="LOCExitPlaynite">退出云游戏</sys:String>
     <sys:String x:Key="LOCLibraries">库</sys:String>
     <sys:String x:Key="LOCUpdateAll">全部更新</sys:String>
     <sys:String x:Key="LOCExtensionCreatedBy">制作者：</sys:String>

@@ -359,6 +359,9 @@
     <Compile Include="Windows\UpdateWindow.xaml.cs">
       <DependentUpon>UpdateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\WindowTest.xaml.cs">
+      <DependentUpon>WindowTest.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProgramEntry.cs" />
@@ -429,6 +432,10 @@
     <None Include="Themes\Desktop\Classic\theme.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Include="Windows\WindowTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <SplashScreen Include="SplashScreen.png" />
     <Content Include="Themes\Desktop\Default\Constants.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -117,6 +117,8 @@ namespace Playnite
             get; set;
         } = 5;
 
+        public int StationID { get; set; } = -1;
+
         private DetailsVisibilitySettings detailsVisibility = new DetailsVisibilitySettings();
         public DetailsVisibilitySettings DetailsVisibility
         {

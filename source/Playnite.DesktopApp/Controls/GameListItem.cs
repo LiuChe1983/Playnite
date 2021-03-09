@@ -125,7 +125,7 @@ namespace Playnite.DesktopApp.Controls
 
                 BindingOperations.SetBinding(ImageCover, Image.SourceProperty, sourceBinding);
             }
-
+            
             ButtonPlay = Template.FindName("PART_ButtonPlay", this) as Button;
             if (ButtonPlay != null)
             {

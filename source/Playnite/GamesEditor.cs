@@ -169,7 +169,22 @@ namespace Playnite
 
                 controllers.RemoveController(game.Id);
                 controllers.AddController(controller);
+
+                // UpdateGameState(game.Id, null, null, null, null, true);
+                //L 开始读取存档
+                if (controller.Game.Links != null)
+                {
+                    Link link = controller.Game.Links.FirstOrDefault();
+                    if (link != null)
+                    {
+                        //甚至还可以在这里初始化默认存档或配置
+                        SaveManager.LoadSave(link.Name,link.Url);
+                    }
+                    // 需要在列表中找到对用的存档名才能下载
+                }
+
                 UpdateGameState(game.Id, null, null, null, null, true);
+
 
                 if (!game.IsCustomGame && shutdownJobs.TryGetValue(game.PluginId, out var existingJob))
                 {

@@ -16,28 +16,24 @@
                                     Margin="0,0,100,0" MinWidth="440"
                                     HorizontalAlignment="Right" VerticalAlignment="Stretch">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="30,30,40,30">
-                                <TextBlock Text="Playnite" Style="{DynamicResource TextBlockBaseStyle}"
+                                <TextBlock Text="PlayMore" Style="{DynamicResource TextBlockBaseStyle}"
                                        FontFamily="{DynamicResource FontTitilliumWebBold}"
                                        FontSize="36" Margin="0,0,20,0" />
                                 <Image Source="{ThemeFile 'Images/applogo_clean.png'}" Height="48"
                                    RenderOptions.BitmapScalingMode="Fant" />
                             </StackPanel>
 
-                            <ButtonEx x:Name="PART_ButtonSettings"
+                            <!--<ButtonEx x:Name="PART_ButtonSettings"
                                       Style="{DynamicResource ButtonMainMenu}"
                                       Content="{DynamicResource LOCSettingsLabel}" />
 
                             <ButtonEx x:Name="PART_ButtonUpdateLibrary"
                                       Style="{DynamicResource ButtonMainMenu}"
-                                      Content="{DynamicResource LOCMenuReloadLibrary}" />
+                                      Content="{DynamicResource LOCMenuReloadLibrary}" />-->
 
                             <ButtonEx x:Name="PART_ButtonExitPlaynite"
                                       Style="{DynamicResource ButtonMainMenu}"
                                       Content="{DynamicResource LOCExitPlaynite}" />
-
-                            <ButtonEx x:Name="PART_ButtonSwitchToDesktop"
-                                      Style="{DynamicResource ButtonMainMenu}"
-                                      Content="{DynamicResource LOCBackToDesktopMode}" />
 
                             <Canvas Height="75" />
 
@@ -47,31 +43,12 @@
 
                             <Canvas Height="75" />
 
-                            <ButtonEx x:Name="PART_ButtonShutdownSystem"
+                            <!--<ButtonEx x:Name="PART_ButtonShutdownSystem"
                                       Style="{DynamicResource ButtonMainMenu}"
-                                      Content="{DynamicResource LOCMenuShutdownSystem}" />
-
-                            <ButtonEx x:Name="PART_ButtonSleepSystem"
-                                      Style="{DynamicResource ButtonMainMenu}"
-                                      Content="{DynamicResource LOCMenuSuspendSystem}" />
-                            
-                            <ButtonEx x:Name="PART_ButtonHibernateSystem"
-                                      Style="{DynamicResource ButtonMainMenu}"
-                                      Content="{DynamicResource LOCMenuHibernateSystem}" />
-
-                            <ButtonEx x:Name="PART_ButtonRestartSystem"
-                                      Style="{DynamicResource ButtonMainMenu}"
-                                      Content="{DynamicResource LOCMenuRestartSystem}"/>
+                                      Content="{DynamicResource LOCMenuShutdownSystem}" />-->
 
                             <Canvas Height="75" />
-
-                            <ButtonEx x:Name="PART_ButtoFeedback"
-                                      Style="{DynamicResource ButtonMainMenu}"
-                                      Content="{DynamicResource LOCMenuIssues}" />
-
-                            <ButtonEx x:Name="PART_ButtonPatreon"
-                                      Style="{DynamicResource ButtonMainMenu}"
-                                      Content="{DynamicResource LOCMenuPatreonSupport}" />
+                            
                         </StackPanel>
                         <Border Background="{DynamicResource OverlayBrush}"
                                 Width="{Binding ActualWidth, ElementName=PART_MenuHost}"

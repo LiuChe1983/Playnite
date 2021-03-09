@@ -302,7 +302,30 @@ namespace Playnite
             // Only use this for Desktop mode. Non-default options look terrible in Fullscreen because of viewport scaling.
             if (mode == ApplicationMode.Desktop)
             {
+                UserManager.FakeInit();
                 Controls.WindowBase.SetTextRenderingOptions(AppSettings.TextFormattingMode, AppSettings.TextRenderingMode);
+            }
+            else
+            {
+                //UserManager.FakeInit(); //测试用
+                //SaveManager.GetCloudSaveList(UserManager.user.UserId);
+                InitUser();
+            }
+
+        }
+
+        public async void InitUser()
+        {
+            
+            bool isOK = await UserManager.Init(AppSettings.StationID);
+            if (!isOK)
+            {
+                logger.Error("获取工作站用户信息失败");
+            }
+            else
+            {
+                logger.Info($"获取工作站用户信息成功：{UserManager.user.UserId}");
+                SaveManager.GetCloudSaveList(UserManager.user.UserId);
             }
         }
 

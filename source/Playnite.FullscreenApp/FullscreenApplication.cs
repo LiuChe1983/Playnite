@@ -38,6 +38,7 @@ namespace Playnite.FullscreenApp
             this.splashScreen = splashScreen;
         }
 
+
         public override void Startup()
         {
             ProgressWindowFactory.SetWindowType<ProgressWindow>();
@@ -46,6 +47,7 @@ namespace Playnite.FullscreenApp
             UpdateWindowFactory.SetWindowType<UpdateWindow>();
             Dialogs = new FullscreenDialogs();
             Playnite.Dialogs.SetHandler(Dialogs);
+            
             if (!AppSettings.FirstTimeWizardComplete)
             {
                 Dialogs.ShowErrorMessage(ResourceProvider.GetString("LOCFullscreenFirstTimeError"), "");
@@ -65,6 +67,8 @@ namespace Playnite.FullscreenApp
             SendUsageDataAsync();
 #pragma warning restore CS4014
             ProcessArguments();
+
+
         }
 
         public override void InstantiateApp()

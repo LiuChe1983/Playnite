@@ -50,9 +50,12 @@ namespace Playnite.Controllers
             playAction = gameClone.PlayAction.ExpandVariables(gameClone);
             profileClone = profileClone?.ExpandVariables(gameClone);
 
+            
+            
             Dispose();
 
             OnStarting(this, new GameControllerEventArgs(this, 0));
+            //启动游戏进程
             var proc = GameActionActivator.ActivateAction(playAction, profileClone);
 
             if (playAction.Type != GameActionType.URL)
