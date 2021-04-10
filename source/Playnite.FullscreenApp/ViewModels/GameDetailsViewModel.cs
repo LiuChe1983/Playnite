@@ -209,9 +209,9 @@ namespace Playnite.FullscreenApp.ViewModels
 
             Game.OtherActions.ForEach(a => items.Add(new GameActionItem(ActivateActionCommand, a, a.Name)));
 
-            items.Add(new GameActionItem(ToggleFavoritesCommand, Game.Favorite ? resources.GetString("LOCRemoveFavoriteGame") : resources.GetString("LOCFavoriteGame")));
-            items.Add(new GameActionItem(ToggleVisibilityCommand, Game.Hidden ? resources.GetString("LOCUnHideGame") : resources.GetString("LOCHideGame")));
-            items.Add(new GameActionItem(RemoveGameCommand, resources.GetString("LOCRemoveGame")));
+            //items.Add(new GameActionItem(ToggleFavoritesCommand, Game.Favorite ? resources.GetString("LOCRemoveFavoriteGame") : resources.GetString("LOCFavoriteGame")));
+            //items.Add(new GameActionItem(ToggleVisibilityCommand, Game.Hidden ? resources.GetString("LOCUnHideGame") : resources.GetString("LOCHideGame")));
+            //items.Add(new GameActionItem(RemoveGameCommand, resources.GetString("LOCRemoveGame")));
 
             if (!Game.IsCustomGame && Game.IsInstalled)
             {

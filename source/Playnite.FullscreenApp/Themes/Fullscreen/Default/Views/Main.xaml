@@ -42,13 +42,13 @@
                                 <ToggleButton x:Name="PART_ToggleFilterRecently" Grid.Column="1"
                                             Style="{DynamicResource ToggleButtonTopFilter}"
                                             Content="{DynamicResource LOCQuickFilterRecentlyPlayed}" Margin="5"/>
-                                <ToggleButton x:Name="PART_ToggleFilterFavorite"  Grid.Column="2"
+                                <!--<ToggleButton x:Name="PART_ToggleFilterFavorite"  Grid.Column="2"
                                             Style="{DynamicResource ToggleButtonTopFilter}"
-                                            Content="{DynamicResource LOCQuickFilterFavorites}" Margin="5" />
-                                <ToggleButton x:Name="PART_ToggleFilterMostPlayed" Grid.Column="3"
+                                            Content="{DynamicResource LOCQuickFilterFavorites}" Margin="5" />-->
+                                <ToggleButton x:Name="PART_ToggleFilterMostPlayed" Grid.Column="2"
                                             Style="{DynamicResource ToggleButtonTopFilter}"
                                             Content="{DynamicResource LOCQuickFilterMostPlayed}" Margin="5"  />
-                                <ToggleButton x:Name="PART_ToggleFilterAll" Grid.Column="4"
+                                <ToggleButton x:Name="PART_ToggleFilterAll" Grid.Column="3"
                                             Style="{DynamicResource ToggleButtonTopFilter}"
                                             Content="{DynamicResource LOCQuickFilterAllGames}" Margin="5"  />
 

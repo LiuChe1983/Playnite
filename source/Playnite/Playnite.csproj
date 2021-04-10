@@ -298,6 +298,7 @@
     <Compile Include="Extensions\ServiceProvider.cs" />
     <Compile Include="FakePlayniteLibraryPlugin.cs" />
     <Compile Include="GameActionActivator.cs" />
+    <Compile Include="GameSaveWatcher.cs" />
     <Compile Include="GamesCollectionView.cs" />
     <Compile Include="GamesCollectionViewEntry.cs" />
     <Compile Include="GamesEditor.cs" />

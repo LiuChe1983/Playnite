@@ -110,7 +110,7 @@ namespace Playnite
             controllers.Stopped -= Controllers_Stopped;
         }
 
-        public void PlayGame(Game game)
+        public async void PlayGame(Game game)
         {
             if (!game.IsInstalled)
             {
@@ -170,20 +170,43 @@ namespace Playnite
                 controllers.RemoveController(game.Id);
                 controllers.AddController(controller);
 
-                // UpdateGameState(game.Id, null, null, null, null, true);
+
+                UpdateGameState(game.Id, null, null, null, null, true);
                 //L 开始读取存档
+               
                 if (controller.Game.Links != null)
                 {
                     Link link = controller.Game.Links.FirstOrDefault();
                     if (link != null)
                     {
+                        logger.Debug($"开始读取存档2: {controller.Game.Links.Count}.");
                         //甚至还可以在这里初始化默认存档或配置
-                        SaveManager.LoadSave(link.Name,link.Url);
+                        try
+                        {
+                            bool isLoadOK = await SaveManager.LoadSave(link.Name, link.Url);
+                            if (!isLoadOK)
+                            {
+                                Dialogs.ShowMessage("读取存档失败,请重试", "发生错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                        }
+                        catch(Exception exp)
+                        {
+                            logger.Debug($"读取存档失败 {exp.ToString()}.");
+                        }
+                    }
+                    else
+                    {
+                        logger.Debug($"游戏不存在链接1？ {controller.Game.Links.Count}.");
                     }
                     // 需要在列表中找到对用的存档名才能下载
+                    
                 }
-
-                UpdateGameState(game.Id, null, null, null, null, true);
+                else
+                {
+                    logger.Debug($"游戏不存在链接2？ {controller.Game.Links.Count}.");
+                    logger.Debug($"游戏不存在链接3？ {dbGame.Links.Count}.");
+                }
 
 
                 if (!game.IsCustomGame && shutdownJobs.TryGetValue(game.PluginId, out var existingJob))
@@ -931,15 +954,19 @@ namespace Playnite
             }
         }
 
-        private void Controllers_Stopped(object sender, GameControllerEventArgs args)
+        private async void Controllers_Stopped(object sender, GameControllerEventArgs args)
         {
             var game = args.Controller.Game;
             logger.Info($"Game {game.Name} stopped after {args.EllapsedTime} seconds.");
-
+            //保存存档
+            if (Application.Mode != ApplicationMode.Desktop)
+            {
+                await SaveManager.CheckSaveUpdate();
+            }
             var dbGame = Database.Games.Get(game.Id);
             dbGame.IsRunning = false;
             dbGame.IsLaunching = false;
-            dbGame.Playtime += args.EllapsedTime;
+            //dbGame.Playtime += args.EllapsedTime; //不修改游玩时间
             Database.Games.Update(dbGame);
             controllers.RemoveController(args.Controller);
             gameStartups.TryRemove(game.Id, out _);

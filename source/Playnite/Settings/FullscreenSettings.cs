@@ -131,6 +131,10 @@ namespace Playnite
             {
                 if (value != activeView)
                 {
+                    if(value == ActiveFullscreenView.Favorites)
+                    {
+                        value = ActiveFullscreenView.All;
+                    }
                     activeView = value;
                     OnPropertyChanged();
                 }

@@ -16,7 +16,17 @@ namespace Playnite
 
         public string Time
         {
-            get => DateTime.Now.ToString(Common.Constants.TimeUiFormat);
+            get
+            {
+                string show = DateTime.Now.ToString(Common.Constants.TimeUiFormat);
+                
+                if (UserManager.station != null)
+                {
+                    TimeSpan timeSpan = DateTime.Now - UserManager.station.ClientStartTime;
+                    show += $" {UserManager.station.StationName}已连接: {(int)timeSpan.TotalMinutes}分";
+                }
+                return show;
+            }
         }
 
         public ObservableTime()
