@@ -204,8 +204,7 @@ namespace Playnite
                 }
                 else
                 {
-                    logger.Debug($"游戏不存在链接2？ {controller.Game.Links.Count}.");
-                    logger.Debug($"游戏不存在链接3？ {dbGame.Links.Count}.");
+                    logger.Debug($"游戏不存在存档链接.");
                 }
 
 
@@ -273,6 +272,8 @@ namespace Playnite
                 }
 
                 controller.Play();
+
+                
             }
             catch (Exception exc) when (!PlayniteEnvironment.ThrowAllErrors)
             {
@@ -806,10 +807,21 @@ namespace Playnite
             }
         }
 
+        public void SwitchToGame(Game game)
+        {
+            var controller =  controllers.GetController(game.Id);
+            GenericGameController generic = controller as GenericGameController;
+            if(generic != null)
+            {
+                generic.SwitchToGame();
+            }
+        }
+
         public void CancelGameMonitoring(Game game)
         {
             controllers.RemoveController(game.Id);
             var dbGame = Database.Games.Get(game.Id);
+            
             dbGame.IsRunning = false;
             dbGame.IsLaunching = false;
             dbGame.IsInstalling = false;
@@ -929,6 +941,7 @@ namespace Playnite
             {
                 if (AppSettings.AfterLaunch == AfterLaunchOptions.Close)
                 {
+                    logger.Error("AppSettings.AfterLaunch == AfterLaunchOptions.Close.");
                     Application.Quit();
                 }
                 else if (AppSettings.AfterLaunch == AfterLaunchOptions.Minimize)
@@ -940,6 +953,7 @@ namespace Playnite
             {
                 if (AppSettings.AfterLaunch == AfterLaunchOptions.Close)
                 {
+                    logger.Error("AppSettings.AfterLaunch == AfterLaunchOptions.Close.");
                     Application.Quit();
                 }
                 else

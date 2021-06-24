@@ -20,6 +20,7 @@ namespace Playnite.Controllers
         protected CancellationTokenSource watcherToken;
         protected Stopwatch stopWatch;
         protected ProcessMonitor procMon;
+        private Process gameProcess;
         private GameDatabase database;
         private static ILogger logger = LogManager.GetLogger();
 
@@ -28,6 +29,23 @@ namespace Playnite.Controllers
             database = db;
         }
 
+        //LLC 2021年5月13日
+        public void SwitchToGame()
+        {
+            Interop.SwitchToThisWindow(gameProcess.MainWindowHandle, true);
+        }
+
+        public void KillGameProc()
+        {
+            try
+            { gameProcess.Kill(); }
+            catch(Exception ex)
+            {
+                logger.Error("杀死游戏进程失败：" + ex.Message);
+            }
+
+        }
+        
         public override void Play()
         {
             if (Game.PlayAction == null)
@@ -57,7 +75,7 @@ namespace Playnite.Controllers
             OnStarting(this, new GameControllerEventArgs(this, 0));
             //启动游戏进程
             var proc = GameActionActivator.ActivateAction(playAction, profileClone);
-
+            gameProcess = proc;
             if (playAction.Type != GameActionType.URL)
             {
                 stopWatch = Stopwatch.StartNew();

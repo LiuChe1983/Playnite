@@ -684,6 +684,9 @@ namespace Playnite.Common
         [DllImport("user32.dll")]
         public static extern int DisplayConfigGetDeviceInfo(ref DISPLAYCONFIG_TARGET_DEVICE_NAME deviceName);
 
+        [DllImport("USER32.DLL")]
+        public static extern void SwitchToThisWindow(IntPtr hwnd, bool fAltTab);
+
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
 

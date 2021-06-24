@@ -42,9 +42,10 @@ namespace Playnite
 
         }
 
+        //更新时间设置为5秒，自动存档间隔为5分钟
         private static async void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            logger.Info("开始检查存档");
+            //logger.Info("开始检查存档");
             await CheckSaveUpdate();
             logger.Info("检查存档完成");
 

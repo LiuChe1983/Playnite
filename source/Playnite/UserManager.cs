@@ -7,6 +7,9 @@ using Common;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Timers;
+using Playnite.SDK;
+using System.Windows;
 
 namespace Playnite
 {
@@ -16,7 +19,10 @@ namespace Playnite
         public static User user;
         public static MyWebApiClient apiClient = new MyWebApiClient();
         public static bool isFake = false;
- 
+        static Timer timer;
+        private static ILogger logger = LogManager.GetLogger();
+        private static PlayniteApplication playniteApplication;
+
         public static void FakeInit(int stationid,int userid)
         {
             station = new Station(stationid);
@@ -24,8 +30,9 @@ namespace Playnite
             isFake = true;
         }
 
-        public static async Task<bool> Init(int stationID)
+        public static async Task<bool> Init(int stationID, PlayniteApplication _playniteApplication)
         {
+            playniteApplication = _playniteApplication;
             Station s = await apiClient.UpdateAsync(stationID);
             if (s != null)
             {
@@ -33,9 +40,18 @@ namespace Playnite
                 //如果工作站用户为-1 则采用1 = qjzh984
                 int userid = s.ClientUserId == -1 ? 1 : s.ClientUserId;
                 user = new User(userid);
+                //初始化完成后，开始更新工作站状态
+                timer = new System.Timers.Timer(1000 * 5); //暂时设置5秒
+                timer.Elapsed += Timer_Elapsed;
+                timer.Start();
                 return true;
             }
             return false;
+        }
+
+        private static void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            CheckStationInfo();
         }
 
         public static StationState lastState = StationState.Usable;
@@ -43,19 +59,29 @@ namespace Playnite
         ///  创建进程检查是否需要强行退出
         /// </summary>
         /// <param name="stationID"></param>
-        public static async void CheckStationInfo(int stationID)
+        public static async void CheckStationInfo()
         {
-            Station s = await apiClient.UpdateAsync(stationID);
+            Station s = await apiClient.UpdateAsync(station.StationID);
             if (s != null)
             {
                 switch(s.State)
                 {
                     case StationState.Gaming:
                         return;
-                    case StationState.Saving:
+                    case StationState.Saving://保存并退出
+                        logger.Info("StationState.Saving: 保存并退出");
+                        await SaveManager.CheckSaveUpdate();
+                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            playniteApplication.Quit();
+                        }));
                         return;
-                        //保存并退出
                 }
+            }
+            else
+            {
+                //更新状态失败？
+                logger.Info("获取工作站状态失败");
             }
         }
 
@@ -85,7 +111,6 @@ namespace Playnite
             {
                 string res = await response.Content.ReadAsStringAsync();
                 s = JsonConvert.DeserializeObject<Station>(res);
-
             }
             return s;
         }

@@ -182,7 +182,9 @@ namespace Playnite.FullscreenApp.ViewModels
                 }
                 else if (Game?.IsRunning == true || Game?.IsLaunching == true)
                 {
-                    CheckExecution();
+                    //2021年5月13日 LLC
+                    //CheckExecution();
+                    gamesEditor.SwitchToGame(Game.Game);
                 }
                 else if (Game?.IsInstalled == false)
                 {
@@ -240,6 +242,7 @@ namespace Playnite.FullscreenApp.ViewModels
                 MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 gamesEditor.CancelGameMonitoring(Game.Game);
+                
             }
         }
     }

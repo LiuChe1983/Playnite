@@ -313,7 +313,7 @@ namespace Playnite
         public async void InitUser()
         {
             
-            bool isOK = await UserManager.Init(AppSettings.StationID);
+            bool isOK = await UserManager.Init(AppSettings.StationID,this);
             if (!isOK)
             {
                 logger.Error("获取工作站用户信息失败");
@@ -474,6 +474,7 @@ namespace Playnite
                     break;
 
                 case CmdlineCommand.Shutdown:
+                    logger.Warn("CmdlineCommand.Shutdown");
                     Quit();
                     break;
 
@@ -603,6 +604,7 @@ namespace Playnite
                 Dialogs.ShowErrorMessage(
                     ResourceProvider.GetString("LOCCefSharpInitError"),
                     ResourceProvider.GetString("LOCStartupError"));
+                logger.Warn("ConfigureApplication ： Quit");
                 Quit();
                 return;
             }
@@ -742,6 +744,16 @@ namespace Playnite
         public void Quit()
         {
             logger.Info("Shutting down Playnite");
+            //LLC 2021年5月13日 关闭所有运行中的游戏
+            foreach(var c in Controllers.Controllers)
+            {
+                GenericGameController generic = c as GenericGameController;
+                if (generic != null)
+                {
+                    if (generic.IsGameRunning)
+                        generic.KillGameProc();
+                }
+            }
             ReleaseResources();
             CurrentNative.Shutdown(0);
         }

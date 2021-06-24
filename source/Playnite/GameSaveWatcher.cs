@@ -77,7 +77,14 @@ namespace Playnite
             DirectoryInfo di = new DirectoryInfo(realPath); //删除存档文件夹
             if (di.Exists)
             {
-                di.Delete(true);
+                try
+                {
+                    di.Delete(true);
+                }
+                catch(Exception ex)
+                {
+                    logger.Error("删除存档文件夹失败:" + ex.Message);
+                }
             }
         }
 
